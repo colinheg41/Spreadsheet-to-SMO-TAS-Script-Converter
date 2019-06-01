@@ -1,0 +1,8 @@
+Line to insert:
+KEY_ZL	32767	0	0	0
+Line to insert at:
+648
+Number of times to insert it:
+1
+Number of scripts:
+5
