@@ -9,10 +9,13 @@ which is very helpful for testing frame windows. Here is the tutorial:
 https://youtu.be/WoxXafQNoGQ
 
 
-modify.exe reads the parameters from modify.txt to make copies of your .tsv
+modify.exe reads the parameters from modify.txt to make copies of your .tsv based on
+those parameters.
 
 convert.exe reads the .tsv filename from modify.txt and converts .tsv's with that filename
-  and any with the same filename but "(x)" appended to it, where x is in the range of 0-9.
+and any with the same filename but "(x)" appended to it, where x is in the range of 0-9.
+Each .tsv is converted to a .txt in a format useable with TAS-nx, starting at script0.txt
+and counting up from there.
 
 Links:
 
