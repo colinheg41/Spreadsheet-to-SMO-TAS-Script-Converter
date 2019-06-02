@@ -72,7 +72,9 @@ void convert_to_script (std::string table_file_name, std::string modify_file_nam
 		// Decide if it's a line with no inputs
 		if (table[i].size() < 6) continue;
 		// Decide if each entry of the line is or is not a number as appropriate
-		bad = false;
+		// ---------Needs to be fixed to allow for negative numbers, just check
+		// ---------that the frame number is correct for now
+		/*bad = false;
 		for (unsigned int j = 0; j < table[i].size(); ++j) {
 			if (j != 1) {
 				bad |= !is_number(table[i][j]);
@@ -81,7 +83,8 @@ void convert_to_script (std::string table_file_name, std::string modify_file_nam
 			}
 		}
 		if (bad) continue;
-		
+		*/
+		if (!is_number(table[i][0])) continue;
 		print_line(file, table[i]);
 	}
 }
