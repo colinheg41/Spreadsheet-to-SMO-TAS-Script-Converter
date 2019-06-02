@@ -1,10 +1,13 @@
 File name of .tsv:
-SMO TAS stuff by CMFP - Sheet1
-Line to overwrite:
+example
+Do you want to overwrite lines in the existing .tsv or insert between them:?
+(either type "overwrite" or "insert" with no quotation marks)
+overwrite
+Line to insert/overwrite:
 NONE	0	0	0	0
-Line to overwrite at:
+Frame number to insert/overwrite at:
 2
-Number of times to insert it:
+Number of times to insert/overwrite it:
 1
 Number of scripts:
 5
