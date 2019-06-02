@@ -1,9 +1,9 @@
 File name of .tsv:
 SMO TAS stuff by CMFP - Sheet1
-Line to insert:
-KEY_ZL	32767	0	0	0
-Line to insert at:
-648
+Line to overwrite:
+NONE	0	0	0	0
+Line to overwrite at:
+2
 Number of times to insert it:
 1
 Number of scripts:

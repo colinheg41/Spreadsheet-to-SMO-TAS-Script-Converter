@@ -1,3 +1,8 @@
+/* Author: Colin Hegarty
+ * Date: 5/25/19
+ * This program contains functions, primarily for parsing purposes.
+ */
+
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
@@ -15,7 +20,10 @@ std::vector<std::vector<std::string> > parse_sheet (const char* separator, std::
 	// Name of the file to be read.
 	std::ifstream file(file_name.c_str());
 	// If the file stream is bad then return an empty vector
-	if (!file.good()) return data;
+	if (!file.good()) {
+		std::cerr << "ERROR: " << file_name << " is missing" << std::endl;
+		return data;
+	}
 	std::string line;
 	//unsigned int start = 0;
 	//unsigned int threshold = 0;
@@ -52,7 +60,10 @@ std::vector<std::string> parse_sheet (std::string file_name) {
 	// File name of the file to be read.
 	std::ifstream file(file_name.c_str());
 	// If the file stream is bad then return an empty vector
-	if (!file.good()) return data;
+	if (!file.good()) {
+		std::cerr << "ERROR: " << file_name << " is missing" << std::endl;
+		return data;
+	}
 	std::string line;
 	//unsigned int start = 0;
 	//unsigned int threshold = 0;
@@ -75,4 +86,38 @@ bool is_number(const std::string& s) {
     std::string::const_iterator it = s.begin();
     while (it != s.end() && std::isdigit(*it)) ++it;
     return !s.empty() && it == s.end();
+}
+
+// Finds the name of the .tsv in the "modify" file. If the name includes ".tsv" at the end,
+// then remove it.
+std::string get_tsv_name(std::string modify_file) {
+	std::string file_name = check_data(modify_file)[1];
+	return remove_tsv_extension(file_name);
+}
+
+// Removes the ".tsv" from the end of the file name if it is there
+std::string remove_tsv_extension (std::string file_name) {
+	if (file_name.length() > 4 && file_name.substr(file_name.length()-4,4) == ".tsv") {
+		file_name = file_name.substr(0,file_name.length()-4);
+	}
+	return file_name;
+}
+
+// Checks that the "modify" file is properly formatted.
+std::vector<std::string> check_data(std::string file_name) {
+	std::vector<std::string> modify_data = parse_sheet(file_name);
+	// Checks that there are enough lines in the file
+	if (modify_data.size() < 13) {
+		std::cerr << "ERROR: " << file_name << " does not have enough lines" << std::endl;
+		exit (EXIT_FAILURE);
+	}
+	// Check that the parameters that should be numbers are, in fact, numbers
+	for (unsigned int i = 8; i < 13; i +=2) {
+		if (!is_number(modify_data[i])) {
+			std::cerr << "ERROR: Line " << i+1 << " of " << file_name << " is not a number" << std::endl;
+			exit (EXIT_FAILURE);
+		}
+	}
+	
+	return modify_data;
 }
