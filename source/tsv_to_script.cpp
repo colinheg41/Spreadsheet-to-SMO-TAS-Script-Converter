@@ -11,18 +11,21 @@
 #include <stdio.h>
 #include <string>	
 #include <cstring>
+#include <map>
 #include "parse.h"
 
 std::vector<std::string> choose_files (std::string base_tsv);
-void write_scripts (std::vector<std::string> file_names, std::string modify_file_name);
+void write_scripts (const std::vector<std::string>& file_names, std::string modify_file_name, std::string delete_param);
 void convert_to_script (std::string table_file_name, std::string modify_file_name, std::string out_file_name);
 std::string increment_string (std::string num);
 void print_line (std::ofstream& file, const std::vector<std::string>& line);
+void delete_tsv (const std::vector<std::string>& file_names, std::string delete_param);
 
 int main (int argc, char* argv[]) {
 	std::string modify_file = "modify.txt";
-	std::string base_tsv = get_tsv_name(modify_file);
-	write_scripts(choose_files(base_tsv), modify_file);
+	Parameters params(modify_file);
+	std::string base_tsv = params.base_tsv();
+	write_scripts(choose_files(base_tsv), modify_file, params.delete_tsv());
 }
 
 // Make a vector of files names for the .tsv's that will be converted.
@@ -52,39 +55,25 @@ std::vector<std::string> choose_files (std::string base_tsv) {
 }
 
 // Loops through the .tsv's and converts each one to a script.
-void write_scripts (std::vector<std::string> file_names, std::string modify_file_name) {
+void write_scripts (const std::vector<std::string>& file_names, std::string modify_file_name, std::string delete_param) {
+	std::string script_name;
+	
 	for (unsigned int i = 0; i < file_names.size(); ++i) {
-		convert_to_script(file_names[i], modify_file_name, "script" + std::to_string(i) + ".txt");
+		script_name = "script" + std::to_string(i) + ".txt";
+		convert_to_script(file_names[i], modify_file_name, script_name);
 	}
+	delete_tsv(file_names, delete_param);
 }
 
 // Executes the conversion process 
 void convert_to_script (std::string table_file_name, std::string modify_file_name, std::string out_file_name) {
 	// Each vector is a row, each string is a cell in that row.
 	std::vector<std::vector<std::string> > table = parse_sheet("\t",table_file_name);
-	//std::vector<std::vector<std::string> > insert = parse_sheet("\t",modify_file_name);
 	std::ofstream file(out_file_name.c_str());
-	//bool inserted = false;
 	bool bad;
-	//std::cout << insert.size();
 	// Read the entries of table, and print the desired info for relevant flights
 	for (unsigned int i = 0; i < table.size(); i++) {
-		// Decide if it's a line with no inputs
-		if (table[i].size() < 6) continue;
-		// Decide if each entry of the line is or is not a number as appropriate
-		// ---------Needs to be fixed to allow for negative numbers, just check
-		// ---------that the frame number is correct for now
-		/*bad = false;
-		for (unsigned int j = 0; j < table[i].size(); ++j) {
-			if (j != 1) {
-				bad |= !is_number(table[i][j]);
-			} else {
-				bad |= is_number(table[i][j]);
-			}
-		}
-		if (bad) continue;
-		*/
-		if (!is_number(table[i][0])) continue;
+		if (!good_tsv_line(table[i])) continue;
 		print_line(file, table[i]);
 	}
 }
@@ -103,4 +92,9 @@ void print_line (std::ofstream& file, const std::vector<std::string>& line) {
 	//	file << "\t" << line[i];
 	//}
 	file << std::endl;
+}
+
+// Check from the "modify" file if the .tsv's should be deleted, and if so, do it
+void delete_tsv (const std::vector<std::string>& file_names, std::string delete_param) {
+	// needs implementation
 }

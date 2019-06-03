@@ -14,46 +14,32 @@
 #include <string>	
 #include <cstring>
 #include <algorithm>
+#include <map>
 #include "parse.h"
 
-// Checks that either overwrite or insert were chosen on the command line.
-// Defaults to insert if both or neither were chosen.
-/*#if defined INSERT && defined OVERWRITE
-#undef OVERWRITE
-#endif
-#if !defined INSERT && !defined OVERWRITE
-#define INSERT
-#endif*/
+void prep_modify(const Parameters& params);
 
 int main (int argc, char* argv[]) {
 	std::string modify_file = "modify.txt";
-	// This is all of the text in the "modify" file
-	std::vector<std::string> modify_data = check_data(modify_file);
+	Parameters params(modify_file);
+	prep_modify(params);
+}
+
+void prep_modify(const Parameters& params) {
 	std::vector<std::string> base_text;
-	// These are all of the parameters specified in the "modify" file
-	std::string base_tsv = modify_data[1];
-	std::string action = modify_data[4]; // Either "overwrite" or "insert"
-	std::string modify_text = modify_data[6];
-	int modify_frame = std::stoi(modify_data[8]);
-	int num_modifies = std::stoi(modify_data[10]);
-	int num_scripts = std::stoi(modify_data[12]);
 	
-	// Make action lowercase
-	std::transform(action.begin(), action.end(), action.begin(), ::tolower);
-	// If the name of the .tsv in the "modify" file has ".tsv" at the end, remove it.
-	base_tsv = remove_tsv_extension(base_tsv);
 	// This is all of the text in the initial .tsv
-	base_text = parse_sheet(base_tsv + ".tsv");
+	base_text = parse_sheet(params.base_tsv() + ".tsv");
 	
 	// Each iteration of the for loop generates a new .tsv that can be converted
 	// to a script.
-	for (unsigned int i = 1; i < num_scripts; ++i) {
+	for (unsigned int i = 1; i < params.num_scripts(); ++i) {
 		// This is a copy of the text of the initial .tsv. It will be modified to fit
 		// the current .tsv
 		std::vector<std::string> text = base_text;
-		std::string file_name = base_tsv + "(" + std::to_string(i) + ").tsv"; // File name of the current .tsv
-		std::ofstream file(file_name.c_str()); // Create/overwrite current .tsv
-		int num_shift = num_modifies*i; // Number of frames that will be inserted/overwritten
+		std::string file_name = params.base_tsv() + "(" + std::to_string(i) + ").tsv"; // File name of the current .tsv
+		std::ofstream file(file_name.c_str()); // Write to current .tsv
+		int num_shift = params.num_modifies()*i; // Number of frames that will be inserted/overwritten
 		bool is_modified = false; // Check for the nested loop if the insertion/overwrite has already occurred
 		// Loops through the lines of the vector representing the current .tsv
 		for (unsigned int j = 0; j < text.size(); ++j) {
@@ -64,21 +50,21 @@ int main (int argc, char* argv[]) {
 			if (!is_number(frame_str)) continue;
 			int frame = std::stoi(frame_str); // turn frame number into an int
 			// Checks if the loop is at the point that lines need to be modified
-			if (!is_modified && frame >= modify_frame) {
+			if (!is_modified && frame >= params.modify_frame()) {
 				is_modified = true;
 				// Output the modification line to the file the correct number of times.
 				for (unsigned int k = 0; k < num_shift; ++k) {
 					// If overwriting, make the loop through the vector skip the same number
 					// of lines as are being added by the modification.
-					if (action == "overwrite") {
+					if (params.action() == "overwrite") {
 						j++;
 					}
-					file << frame+k << "\t" << modify_text << std::endl;
+					file << frame+k << "\t" << params.modify_text() << std::endl;
 				}
 			}
 			// If inserting and the insertion has already happened, increase all remaining frame
 			// numbers by the number of lines that were inserted.
-			if (action == "insert" && is_modified) {
+			if (params.action() == "insert" && is_modified) {
 				text[j] = std::to_string(frame+num_shift) + text[j].substr(tab_index);
 			}
 			// Output the current line to the .tsv
