@@ -33,12 +33,19 @@ Parameters::Parameters(std::string file_name) {
 	modify_frame_ = std::stoi(data[ln["modify_frame"]]);
 	num_modifies_ = std::stoi(data[ln["num_modifies"]]);
 	num_scripts_ = std::stoi(data[ln["num_scripts"]]);
-	delete_tsv_ = data[ln["delete_tsv"]];
+	// Once these features are implemented, the commented assignments will replace the
+	// uncommented ones
+	/*delete_tsv_ = data[ln["delete_tsv"]];
 	reverse_ = lowercase(data[ln["reverse"]]) == "yes";
 	tsv_folder_ = lowercase(data[ln["tsv_folder"]]) == "yes";
 	script_folder_ = lowercase(data[ln["script_folder"]]) == "yes";
 	modify_before_conversion_ = lowercase(data[ln["modify_before_conversion"]]) == "before"
-							|| lowercase(data[ln["modify_before_conversion"]]) == ".tsv";
+							|| lowercase(data[ln["modify_before_conversion"]]) == ".tsv";*/
+	delete_tsv_ = "none";
+	reverse_ = "no";
+	tsv_folder_ = "no";
+	script_folder_ = "no";
+	modify_before_conversion_ = "before";
 	file_length_ = ln["file_length"];
 }
 
