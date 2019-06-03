@@ -97,5 +97,10 @@ void print_line (std::ofstream& file, const std::vector<std::string>& line) {
 	file << line[1] << " ";
 	// Left stick then right stick
 	file << line[2] << ";" << line[3] << " ";
-	file << line[4] << ";" << line[5] << std::endl;
+	file << line[4] << ";" << line[5];
+	// The commented code below would include comments after the last input
+	//for (unsigned int i = 6; i < line.size(); ++i) {
+	//	file << "\t" << line[i];
+	//}
+	file << std::endl;
 }
