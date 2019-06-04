@@ -1,13 +1,13 @@
-File name of .tsv:
+-----File name of .tsv:
 example
-Do you want to overwrite lines in the existing .tsv or insert between them:?
-(either type "overwrite" or "insert" with no quotation marks)
+-----Do you want to overwrite lines in the existing .tsv or insert between them?
+	-----options: "overwrite", "insert"
 overwrite
-Line to insert/overwrite:
+-----Line to insert/overwrite:
 NONE	0	0	0	0
-Frame number to insert/overwrite at:
+-----Frame number to insert/overwrite at:
 2
-Number of times to insert/overwrite it:
+-----Number of times to insert/overwrite it:
 1
-Number of scripts:
+-----Number of scripts:
 5
