@@ -45,8 +45,6 @@ Parameters::Parameters(std::string file_name) {
 							|| lowercase(data[ln["modify_before_conversion"]]) == ".tsv";
 	reverse_convert_ = lowercase(data[ln["reverse_convert"]]) == "yes";
 	#else
-	//delete_tsv_ = "none";
-	std::cout << "check 2\n";
 	reverse_modify_ = "no";
 	tsv_folder_ = "no";
 	script_folder_ = "no";
