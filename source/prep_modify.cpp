@@ -15,21 +15,45 @@
 #include <cstring>
 #include <algorithm>
 #include <map>
+#include <cstdio>
+#include <cerrno>
+#include <direct.h>
 #include "parse.h"
 
 void prep_modify(const Parameters& params);
 
 int main (int argc, char* argv[]) {
-	std::string modify_file = "modify.txt";
+	std::string modify_file = "settings.txt";
 	Parameters params(modify_file);
 	prep_modify(params);
 }
 
 void prep_modify(const Parameters& params) {
 	std::vector<std::string> base_text;
+	std::string tsv_folder = "";
+	
+	// If .tsv's are supposed to be put in a different folder, then move the original one and make the file
+	// names of all .tsv's include the directory
+	if (params.tsv_folder()) {
+		tsv_folder += "tsv\\";
+		_mkdir(tsv_folder.c_str());
+		// Move original
+		if(std::rename((params.base_tsv() + ".tsv").c_str(), (tsv_folder + params.base_tsv() + ".tsv").c_str()) < 0) {
+			//std::cout << "errno: " << strerror(errno) << '\n';
+		}
+		// Remove the original .tsv from the original folder if it's still there
+		if (remove((params.base_tsv() + ".tsv").c_str()) != 0) {
+			//perror("Error deleting file");
+			//std::cerr << "ERROR: failed to delete " << params.base_tsv() + ".tsv" << std::endl;
+		}
+	}
 	
 	// This is all of the text in the initial .tsv
-	base_text = parse_sheet(params.base_tsv() + ".tsv");
+	base_text = parse_sheet(tsv_folder + params.base_tsv() + ".tsv");
+	// If the file wasn't there, then the table is empty and the program should end
+	if (base_text.size() == 0) {
+		return;
+	}
 	
 	// Each iteration of the for loop generates a new .tsv that can be converted
 	// to a script.
@@ -37,7 +61,7 @@ void prep_modify(const Parameters& params) {
 		// This is a copy of the text of the initial .tsv. It will be modified to fit
 		// the current .tsv
 		std::vector<std::string> text = base_text;
-		std::string file_name = params.base_tsv() + "(" + std::to_string(i) + ").tsv"; // File name of the current .tsv
+		std::string file_name = tsv_folder + params.base_tsv() + "(" + std::to_string(i) + ").tsv"; // File name of the current .tsv
 		std::ofstream file(file_name.c_str()); // Write to current .tsv
 		int num_shift = params.num_modifies()*i; // Number of frames that will be inserted/overwritten
 		bool is_modified = false; // Check for the nested loop if the insertion/overwrite has already occurred
@@ -70,5 +94,6 @@ void prep_modify(const Parameters& params) {
 			// Output the current line to the .tsv
 			file << text[j] << std::endl;
 		}
+		file.close();
 	}
 }
