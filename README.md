@@ -1,3 +1,5 @@
+IMPORTANT: Don't use v1.1.1, use v1.1.0 instead. v1.1.1 has bugs that will be fixed in the next update.
+
 This is a converter from a .tsv, that you export from a spreadsheet, to a .txt
 that can be used as a script for TAS-nx. Here is a link to TAS-nx:
 https://github.com/hamhub7/TAS-nx/releases
