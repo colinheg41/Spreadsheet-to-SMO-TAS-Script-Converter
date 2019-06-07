@@ -14,8 +14,6 @@
 #include <map>
 #include "parse.h"
 
-//#define NEW_FEATURES
-
 // Check that the "modify" file is configured correctly, and then assign
 // values to all the variables based on the data in the file.
 Parameters::Parameters(std::string file_name) {
@@ -35,22 +33,19 @@ Parameters::Parameters(std::string file_name) {
 	modify_frame_ = std::stoi(data[ln["modify_frame"]]);
 	num_modifies_ = std::stoi(data[ln["num_modifies"]]);
 	num_scripts_ = std::stoi(data[ln["num_scripts"]]);
-	delete_tsv_ = data[ln["delete_tsv"]];
-	// These features still need to be implemented
-	#ifdef NEW_FEATURES
-	reverse_modify_ = lowercase(data[ln["reverse_modify"]]) == "yes";
+	// Once these features are implemented, the commented assignments will replace the
+	// uncommented ones
+	/*delete_tsv_ = data[ln["delete_tsv"]];
+	reverse_ = lowercase(data[ln["reverse"]]) == "yes";
 	tsv_folder_ = lowercase(data[ln["tsv_folder"]]) == "yes";
 	script_folder_ = lowercase(data[ln["script_folder"]]) == "yes";
 	modify_before_conversion_ = lowercase(data[ln["modify_before_conversion"]]) == "before"
-							|| lowercase(data[ln["modify_before_conversion"]]) == ".tsv";
-	reverse_convert_ = lowercase(data[ln["reverse_convert"]]) == "yes";
-	#else
-	reverse_modify_ = "no";
+							|| lowercase(data[ln["modify_before_conversion"]]) == ".tsv";*/
+	delete_tsv_ = "none";
+	reverse_ = "no";
 	tsv_folder_ = "no";
 	script_folder_ = "no";
 	modify_before_conversion_ = "before";
-	reverse_convert_ = "no";
-	#endif
 	file_length_ = ln["file_length"];
 }
 
@@ -63,19 +58,13 @@ std::map<std::string,unsigned int> make_line_nums() {
 	line_nums["modify_frame"] = line_nums["modify_text"]+2;
 	line_nums["num_modifies"] = line_nums["modify_frame"]+2;
 	line_nums["num_scripts"] = line_nums["num_modifies"]+2;
-	
-	line_nums["delete_tsv"] = line_nums["num_scripts"]+4;
-	#ifdef NEW_FEATURES
-	line_nums["reverse_modify"] = line_nums["delete_tsv"]+3;
-	line_nums["tsv_folder"] = line_nums["reverse_modify"]+3;
-	line_nums["script_folder"] = line_nums["tsv_folder"]+3;
-	line_nums["modify_before_conversion"] = line_nums["script_folder"]+3;
-	line_nums["reverse_convert"] = line_nums["modify_before_conversion"]+3;
-	line_nums["file_length"] = line_nums["reverse_convert"]+1;
-	#else
+	//line_nums["delete_tsv"] = line_nums["num_scripts"]+4;
+	//line_nums["reverse"] = line_nums["delete_tsv"]+3;
+	//line_nums["tsv_folder"] = line_nums["reverse"]+3;
+	//line_nums["script_folder"] = line_nums["tsv_folder"]+3;
+	//line_nums["modify_before_conversion"] = line_nums["script_folder"]+3;
+	//line_nums["file_length"] = line_nums["modify_before_conversion"]+1;
 	line_nums["file_length"] = line_nums["num_scripts"]+1;
-	#endif
-	
 	return line_nums;
 }
 
@@ -85,15 +74,12 @@ std::map<std::string,std::vector<std::string> > make_options () {
 	std::vector<std::string> temp;
 	
 	options["action"] = {"insert", "overwrite"};
-	
-	options["delete_tsv"] = {"all", "none", "all except original"};
-	#ifdef NEW_FEATURES
-	options["reverse_modify"] = {"yes", "no"};
+	/*options["delete_tsv"] = {"all", "none", "all except original"};
+	options["reverse"] = {"yes", "no"};
 	options["tsv_folder"] = {"yes", "no"};
 	options["script_folder"] = {"yes", "no"};
 	options["modify_before_conversion"] = {"script", "after", ".tsv", "before"};
-	options["reverse_convert"] = {"yes", "no"};
-	#endif
+	*/
 	
 	return options;
 }
@@ -153,6 +139,7 @@ std::vector<std::vector<std::string> > parse_sheet (std::string delimiter, std::
 		data.push_back(split_string(mid_data[i], delimiter));
 	}
 	
+	
 	return data;
 }
 
@@ -168,13 +155,21 @@ std::vector<std::string> parse_sheet (std::string file_name) {
 		return data;
 	}
 	std::string line;
+	//unsigned int start = 0;
+	//unsigned int threshold = 0;
 	// Loop through the lines of the file
 	while (!file.eof()) { // parse the file into "data"
 		getline(file, line);
+		// only start parsing after the threshold line of the file
+		//if (start < threshold) {
+		//	start++;
+		//	continue;
+		//}
+		
 		data.push_back(line); // add current line to "data"
 	}
-	file.close();
 	return data;
+	//return parse_sheet('', file_name);
 }
 
 // Checks if a string is a number.
@@ -248,11 +243,8 @@ std::vector<std::string> check_data(std::string file_name,
 	}
 	
 	// Check that the parameters with various options are one of the allowed options
-	#ifdef NEW_FEATURES
-	check = {"action", "delete_tsv", "reverse_modify", "tsv_folder", "script_folder", "modify_before_conversion", "reverse_convert"};
-	#else
-	check = {"action", "delete_tsv"};
-	#endif
+	//check = {"action", "delete_tsv", "reverse", "tsv_folder", "script_folder", "modify_before_conversion"};
+	check = {"action"};
 	for (unsigned int i = 0; i < check.size(); ++i) {
 		line_num = ln[check[i]];
 		options = options_map[check[i]];

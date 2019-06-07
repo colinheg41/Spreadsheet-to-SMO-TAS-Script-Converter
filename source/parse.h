@@ -20,11 +20,10 @@ public:
 	const int& num_modifies() const { return num_modifies_; }
 	const int& num_scripts() const { return num_scripts_; }
 	const std::string& delete_tsv() const { return delete_tsv_; }
-	const bool& reverse_modify() const { return reverse_modify_; }
+	const bool& reverse() const { return reverse_; }
 	const bool& tsv_folder() const { return tsv_folder_; }
 	const bool& script_folder() const { return script_folder_; }
 	const bool& modify_before_conversion() const { return modify_before_conversion_; }
-	const bool& reverse_convert() const { return reverse_convert_; }
 	const int& file_length() const { return file_length_; }
 
 private: // Representation
@@ -37,11 +36,10 @@ private: // Representation
 	int num_modifies_; // number of times to do modification per script
 	int num_scripts_; // number of scripts to make
 	std::string delete_tsv_; // to delete .tsv's on conversion: all, none, all except original
-	bool reverse_modify_; // do modification going up the inputs instead of down?
+	bool reverse_; // do modification going up the inputs instead of down?
 	bool tsv_folder_; // make a separate folder for the .tsv files?
 	bool script_folder_; // make a separate folder for the scripts?
 	bool modify_before_conversion_; // modify the inputs before converting the scripts?
-	bool reverse_convert_; // convert scripts to .tsv's instead of .tsv's to scripts
 	int file_length_; // expected number of lines in the "modify" file
 };
 
