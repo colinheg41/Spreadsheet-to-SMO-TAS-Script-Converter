@@ -2,6 +2,11 @@ This is a converter from a .tsv, that you export from a spreadsheet, to a .txt
 that can be used as a script for TAS-nx. Here is a link to TAS-nx:
 https://github.com/hamhub7/TAS-nx/releases
 
+NOTE: The video tutorial below is currently out of date with v2.0.0+, a new video
+will be made at some point. It still has useful info later in the video about how
+to make use of the tools, but the specifics of how to set things up now are laid out
+in this README.
+
 I made a video tutorial on how to use these tools. It'll just take a minute or two to
 understand the basics, but I go explain more about how to utilize the "modify" tool,
 which is very helpful for testing frame windows. Here is the tutorial:
