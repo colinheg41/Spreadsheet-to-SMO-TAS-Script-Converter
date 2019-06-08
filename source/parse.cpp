@@ -8,7 +8,7 @@
 #include <fstream>
 #include <vector>
 #include <stdio.h>
-#include <string>	
+#include <string>
 #include <cstring>
 #include <algorithm>
 #include <map>
@@ -19,33 +19,23 @@
 Parameters::Parameters(std::string file_name) {
 	// Set the lines in the "modify" file where each parameter should be
 	ln = make_line_nums();
-	
+
 	// Set the options for the parameters that have various options
 	options_ = make_options();
-	
+
 	// Read the "modify" file and make sure it's properly formatted
 	std::vector<std::string> data = check_data(file_name, ln, options_);
-	
+
 	// Assign all the parameters to variables
 	base_tsv_ = remove_tsv_extension(data[ln["base_tsv"]]);
 	action_ = data[ln["action"]];
-	modify_text_ = data[ln["modify_text"]];
 	modify_frame_ = std::stoi(data[ln["modify_frame"]]);
-	num_modifies_ = std::stoi(data[ln["num_modifies"]]);
 	num_scripts_ = std::stoi(data[ln["num_scripts"]]);
-	// Once these features are implemented, the commented assignments will replace the
-	// uncommented ones
-	/*delete_tsv_ = data[ln["delete_tsv"]];
-	reverse_ = lowercase(data[ln["reverse"]]) == "yes";
+	delete_tsv_ = data[ln["delete_tsv"]];
 	tsv_folder_ = lowercase(data[ln["tsv_folder"]]) == "yes";
 	script_folder_ = lowercase(data[ln["script_folder"]]) == "yes";
 	modify_before_conversion_ = lowercase(data[ln["modify_before_conversion"]]) == "before"
-							|| lowercase(data[ln["modify_before_conversion"]]) == ".tsv";*/
-	delete_tsv_ = "none";
-	reverse_ = "no";
-	tsv_folder_ = "no";
-	script_folder_ = "no";
-	modify_before_conversion_ = "before";
+							|| lowercase(data[ln["modify_before_conversion"]]) == ".tsv";
 	file_length_ = ln["file_length"];
 }
 
@@ -54,17 +44,14 @@ std::map<std::string,unsigned int> make_line_nums() {
 	std::map<std::string,unsigned int> line_nums;
 	line_nums["base_tsv"] = 1;
 	line_nums["action"] = line_nums["base_tsv"]+3;
-	line_nums["modify_text"] = line_nums["action"]+2;
-	line_nums["modify_frame"] = line_nums["modify_text"]+2;
-	line_nums["num_modifies"] = line_nums["modify_frame"]+2;
-	line_nums["num_scripts"] = line_nums["num_modifies"]+2;
-	//line_nums["delete_tsv"] = line_nums["num_scripts"]+4;
-	//line_nums["reverse"] = line_nums["delete_tsv"]+3;
-	//line_nums["tsv_folder"] = line_nums["reverse"]+3;
-	//line_nums["script_folder"] = line_nums["tsv_folder"]+3;
-	//line_nums["modify_before_conversion"] = line_nums["script_folder"]+3;
-	//line_nums["file_length"] = line_nums["modify_before_conversion"]+1;
-	line_nums["file_length"] = line_nums["num_scripts"]+1;
+	line_nums["modify_frame"] = line_nums["action"]+2;
+	line_nums["num_scripts"] = line_nums["modify_frame"]+2;
+	line_nums["delete_tsv"] = line_nums["num_scripts"]+4;
+	line_nums["tsv_folder"] = line_nums["delete_tsv"]+3;
+	line_nums["script_folder"] = line_nums["tsv_folder"]+3;
+	line_nums["modify_before_conversion"] = line_nums["script_folder"]+3;
+	line_nums["file_length"] = line_nums["modify_before_conversion"]+1;
+
 	return line_nums;
 }
 
@@ -72,15 +59,14 @@ std::map<std::string,unsigned int> make_line_nums() {
 std::map<std::string,std::vector<std::string> > make_options () {
 	std::map<std::string,std::vector<std::string> > options;
 	std::vector<std::string> temp;
-	
+
 	options["action"] = {"insert", "overwrite"};
-	/*options["delete_tsv"] = {"all", "none", "all except original"};
-	options["reverse"] = {"yes", "no"};
+
+	options["delete_tsv"] = {"all", "none", "all except original"};
 	options["tsv_folder"] = {"yes", "no"};
 	options["script_folder"] = {"yes", "no"};
 	options["modify_before_conversion"] = {"script", "after", ".tsv", "before"};
-	*/
-	
+
 	return options;
 }
 
@@ -101,8 +87,29 @@ std::vector<std::string> split_string(std::string line, std::string delimiter) {
 		line.erase(0, pos + delimiter.length());
 	}
 	row.push_back(line);
-	
+
 	return row;
+}
+
+// Takes a .tsv line (from the "modify" file) and converts it to a script line
+std::string to_script_line(std::string tsv_line) {
+	std::vector<std::string> inputs;
+	std::string result;
+
+	// If it's not a proper tsv line, just return the original string
+	if (!good_tsv_line("0\t" + tsv_line)) {
+		return tsv_line;
+	}
+	// Convert the string to a vector
+	inputs = split_string(tsv_line, "\t");
+	// Return the line as a script line
+	result = inputs[0] + " " + inputs[1] + ";" + inputs[2] + " " + inputs[3] + ";" + inputs[4];
+	return result;
+}
+
+//
+std::string to_tsv_line(std::string script_line) {
+	// needs implementation
 }
 
 // Check if a line from a .tsv is properly formatted
@@ -117,7 +124,7 @@ bool good_tsv_line(const std::vector<std::string>& inputs) {
 	for (unsigned int i = 1; i < 6; ++i) {
 		if (inputs[i] == "") return false;
 	}
-	
+
 	return true;
 }
 
@@ -138,13 +145,12 @@ std::vector<std::vector<std::string> > parse_sheet (std::string delimiter, std::
 	for (unsigned int i = 0; i < mid_data.size(); ++i) {
 		data.push_back(split_string(mid_data[i], delimiter));
 	}
-	
-	
+
 	return data;
 }
 
 // Take the name of a file and returns a vector where each item in
-// the vector is a line 
+// the vector is a line
 std::vector<std::string> parse_sheet (std::string file_name) {
 	std::vector<std::string> data; // will be returned by the function
 	// File name of the file to be read.
@@ -155,21 +161,13 @@ std::vector<std::string> parse_sheet (std::string file_name) {
 		return data;
 	}
 	std::string line;
-	//unsigned int start = 0;
-	//unsigned int threshold = 0;
 	// Loop through the lines of the file
 	while (!file.eof()) { // parse the file into "data"
 		getline(file, line);
-		// only start parsing after the threshold line of the file
-		//if (start < threshold) {
-		//	start++;
-		//	continue;
-		//}
-		
 		data.push_back(line); // add current line to "data"
 	}
+	file.close();
 	return data;
-	//return parse_sheet('', file_name);
 }
 
 // Checks if a string is a number.
@@ -213,38 +211,31 @@ std::string to_string(const std::vector<std::string>& list, std::string separato
 std::vector<std::string> check_data(std::string file_name,
 			std::map<std::string,unsigned int>& ln,
 			std::map<std::string,std::vector<std::string> >& options_map) {
-	
+
 	std::vector<std::string> check;
 	std::vector<std::string> options;
 	std::vector<std::string> data = parse_sheet(file_name);
 	bool bad = false;
 	int line_num;
-	
+
 	// 'base_tsv' doesn't need checking
-	
+
 	// Checks that there are enough lines in the file
 	if (data.size() < ln["file_length"]) {
 		fail("lines", file_name + " does not have enough lines", data.size()-1);
 	}
-	
-	// Check that 'modify_text' is good
-	line_num = ln["modify_text"];
-	if (!good_tsv_line(data[line_num]) && !good_script_line(data[line_num])) {
-		fail("inputs", "", line_num+1);
-	}
-	
+
 	// Check that the parameters that are supposed to be numbers are positive ints
-	check = {"modify_frame", "num_modifies", "num_scripts"};
+	check = {"modify_frame", "num_scripts"};
 	for (unsigned int i = 0; i < check.size(); ++i) {
 		line_num = ln[check[i]];
 		if (!is_number(data[line_num])) {
 			fail("number", "", line_num+1);
 		}
 	}
-	
+
 	// Check that the parameters with various options are one of the allowed options
-	//check = {"action", "delete_tsv", "reverse", "tsv_folder", "script_folder", "modify_before_conversion"};
-	check = {"action"};
+	check = {"action", "delete_tsv", "tsv_folder", "script_folder", "modify_before_conversion"};
 	for (unsigned int i = 0; i < check.size(); ++i) {
 		line_num = ln[check[i]];
 		options = options_map[check[i]];
@@ -253,11 +244,11 @@ std::vector<std::string> check_data(std::string file_name,
 			fail("option", to_string(options, ", "), line_num+1);
 		}
 	}
-	
+
 	return data;
 }
 
-// Outputs an error message and exits the program	
+// Outputs an error message and exits the program
 void fail (std::string condition, std::string message, int line_num) {
 	std::cerr << "ERROR: ";
 	if (condition == "lines") {
@@ -271,7 +262,7 @@ void fail (std::string condition, std::string message, int line_num) {
 	} else {
 		std::cerr << "unknown error";
 	}
-	
+
 	std::cerr << std::endl;
 	exit (EXIT_FAILURE);
 }

@@ -1,0 +1,22 @@
+-----File name of .tsv:
+example
+-----Do you want to overwrite lines in the existing .tsv or insert between them?
+	-----options: "overwrite", "insert"
+insert
+-----Frame number to insert/overwrite at:
+2
+-----Number of scripts:
+10
+--------------------------------------ADVANCED SETTINGS---------------------------------------
+-----Delete .tsv's upon conversion?
+	-----options: "all", "none", "all except original"
+none
+-----Put .tsv's in a separate folder?
+	-----options: "yes", "no"
+no
+-----Put scripts in a separate folder?
+	-----options: "yes", "no"
+no
+-----Modify scripts instead of .tsv's i.e. modify after or before conversion?
+	-----options: "script"/"after", ".tsv"/"before"
+after

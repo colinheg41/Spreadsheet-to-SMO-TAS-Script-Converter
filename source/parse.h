@@ -15,12 +15,9 @@ public:
 	const std::map<std::string,std::vector<std::string> >& options() const { return options_; }
 	const std::string& base_tsv() const { return base_tsv_; }
 	const std::string& action() const { return action_; }
-	const std::string& modify_text() const { return modify_text_; }
 	const int& modify_frame() const { return modify_frame_; }
-	const int& num_modifies() const { return num_modifies_; }
 	const int& num_scripts() const { return num_scripts_; }
 	const std::string& delete_tsv() const { return delete_tsv_; }
-	const bool& reverse() const { return reverse_; }
 	const bool& tsv_folder() const { return tsv_folder_; }
 	const bool& script_folder() const { return script_folder_; }
 	const bool& modify_before_conversion() const { return modify_before_conversion_; }
@@ -31,12 +28,9 @@ private: // Representation
 	std::map<std::string,std::vector<std::string> > options_; // line numbers of each parameter
 	std::string base_tsv_; // .tsv name without extension
 	std::string action_; // "insert" or "overwrite"
-	std::string modify_text_; // the line of inputs
 	int modify_frame_; // frame to start modification at
-	int num_modifies_; // number of times to do modification per script
 	int num_scripts_; // number of scripts to make
 	std::string delete_tsv_; // to delete .tsv's on conversion: all, none, all except original
-	bool reverse_; // do modification going up the inputs instead of down?
 	bool tsv_folder_; // make a separate folder for the .tsv files?
 	bool script_folder_; // make a separate folder for the scripts?
 	bool modify_before_conversion_; // modify the inputs before converting the scripts?
@@ -47,6 +41,8 @@ std::map<std::string,unsigned int> make_line_nums();
 std::map<std::string,std::vector<std::string> > make_options();
 std::string lowercase (std::string str);
 std::vector<std::string> split_string(std::string line, std::string delimiter);
+std::string to_script_line(std::string tsv_line);
+std::string to_tsv_line(std::string script_line);
 bool good_tsv_line(std::string line);
 bool good_tsv_line(const std::vector<std::string>& inputs);
 bool good_script_line(std::string line);
