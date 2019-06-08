@@ -1,0 +1,11 @@
+open ftp://a@xxx.xxx.xxx.xxx:5000/
+
+lcd "C:\your\TAS\scripts\directory"
+cd /scripts
+
+put script0.txt
+
+exit
+
+# Execute the script using a command like:
+# "C:\Program Files (x86)\WinSCP\WinSCP.com" /log=WinSCP.log /ini=nul /script=script_for_upload.txt

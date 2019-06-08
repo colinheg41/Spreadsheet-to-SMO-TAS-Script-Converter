@@ -1,0 +1,130 @@
+. 2019-06-08 13:43:18.074 --------------------------------------------------------------------------
+. 2019-06-08 13:43:18.074 WinSCP Version 5.15.2 (Build 9590) (OS 10.0.17134 - Windows 10 Enterprise)
+. 2019-06-08 13:43:18.075 Configuration: nul
+. 2019-06-08 13:43:18.076 Log level: Normal
+. 2019-06-08 13:43:18.077 Local account: LAPTOP-4MN24JV3\colin
+. 2019-06-08 13:43:18.077 Working directory: C:\Users\colin\Videos\Super Mario Odyssey\TAS\Programs\Spreadsheet-to-SMO-TAS-Script\WinSCP_Script_Maker
+. 2019-06-08 13:43:18.077 Process ID: 25072
+. 2019-06-08 13:43:18.077 Command-line: "C:\Program Files (x86)\WinSCP\WinSCP.exe" /console=5.15.2 /consoleinstance=_24780_747 "/log=WinSCP.log" "/ini=nul" "/script=script_for_upload.txt" 
+. 2019-06-08 13:43:18.077 Time zone: Current: GMT-4, Standard: GMT-5 (Eastern Standard Time), DST: GMT-4 (Eastern Daylight Time), DST Start: 3/10/2019, DST End: 11/3/2019
+. 2019-06-08 13:43:18.078 Login time: Saturday, June 8, 2019 1:43:18 PM
+. 2019-06-08 13:43:18.078 --------------------------------------------------------------------------
+. 2019-06-08 13:43:18.078 Script: Retrospectively logging previous script records:
+> 2019-06-08 13:43:18.078 Script: open ftp://a@192.168.137.27:5000/
+. 2019-06-08 13:43:18.078 --------------------------------------------------------------------------
+. 2019-06-08 13:43:18.078 Session name: a@192.168.137.27 (Ad-Hoc site)
+. 2019-06-08 13:43:18.078 Host name: 192.168.137.27 (Port: 5000)
+. 2019-06-08 13:43:18.078 User name: a (Password: No, Key file: No, Passphrase: No)
+. 2019-06-08 13:43:18.078 Transfer Protocol: FTP
+. 2019-06-08 13:43:18.078 Ping type: Dummy, Ping interval: 30 sec; Timeout: 15 sec
+. 2019-06-08 13:43:18.078 Disable Nagle: No
+. 2019-06-08 13:43:18.078 Proxy: None
+. 2019-06-08 13:43:18.078 Send buffer: 262144
+. 2019-06-08 13:43:18.078 UTF: Auto
+. 2019-06-08 13:43:18.078 FTPS: None [Client certificate: No]
+. 2019-06-08 13:43:18.078 FTP: Passive: Yes [Force IP: Auto]; MLSD: Auto [List all: Auto]; HOST: Auto
+. 2019-06-08 13:43:18.078 Local directory: default, Remote directory: home, Update: Yes, Cache: Yes
+. 2019-06-08 13:43:18.078 Cache directory changes: Yes, Permanent: Yes
+. 2019-06-08 13:43:18.078 Recycle bin: Delete to: No, Overwritten to: No, Bin path: 
+. 2019-06-08 13:43:18.078 Timezone offset: 0h 0m
+. 2019-06-08 13:43:18.078 --------------------------------------------------------------------------
+. 2019-06-08 13:43:18.081 Connecting to 192.168.137.27:5000 ...
+. 2019-06-08 13:43:33.076 Timeout detected. (control connection)
+. 2019-06-08 13:43:33.076 Connection failed.
+. 2019-06-08 13:45:15.379 --------------------------------------------------------------------------
+. 2019-06-08 13:45:15.379 WinSCP Version 5.15.2 (Build 9590) (OS 10.0.17134 - Windows 10 Enterprise)
+. 2019-06-08 13:45:15.380 Configuration: nul
+. 2019-06-08 13:45:15.380 Log level: Normal
+. 2019-06-08 13:45:15.380 Local account: LAPTOP-4MN24JV3\colin
+. 2019-06-08 13:45:15.380 Working directory: C:\Users\colin\Videos\Super Mario Odyssey\TAS\Programs\Spreadsheet-to-SMO-TAS-Script\WinSCP_Script_Maker
+. 2019-06-08 13:45:15.380 Process ID: 14304
+. 2019-06-08 13:45:15.380 Command-line: "C:\Program Files (x86)\WinSCP\WinSCP.exe" /console=5.15.2 /consoleinstance=_8000_715 "/log=WinSCP.log" "/ini=nul" "/script=script_for_upload.txt" 
+. 2019-06-08 13:45:15.380 Time zone: Current: GMT-4, Standard: GMT-5 (Eastern Standard Time), DST: GMT-4 (Eastern Daylight Time), DST Start: 3/10/2019, DST End: 11/3/2019
+. 2019-06-08 13:45:15.380 Login time: Saturday, June 8, 2019 1:45:15 PM
+. 2019-06-08 13:45:15.380 --------------------------------------------------------------------------
+. 2019-06-08 13:45:15.380 Script: Retrospectively logging previous script records:
+> 2019-06-08 13:45:15.380 Script: open ftp://a@192.168.137.27:5000/
+. 2019-06-08 13:45:15.380 --------------------------------------------------------------------------
+. 2019-06-08 13:45:15.380 Session name: a@192.168.137.27 (Ad-Hoc site)
+. 2019-06-08 13:45:15.380 Host name: 192.168.137.27 (Port: 5000)
+. 2019-06-08 13:45:15.380 User name: a (Password: No, Key file: No, Passphrase: No)
+. 2019-06-08 13:45:15.380 Transfer Protocol: FTP
+. 2019-06-08 13:45:15.380 Ping type: Dummy, Ping interval: 30 sec; Timeout: 15 sec
+. 2019-06-08 13:45:15.380 Disable Nagle: No
+. 2019-06-08 13:45:15.380 Proxy: None
+. 2019-06-08 13:45:15.380 Send buffer: 262144
+. 2019-06-08 13:45:15.380 UTF: Auto
+. 2019-06-08 13:45:15.380 FTPS: None [Client certificate: No]
+. 2019-06-08 13:45:15.380 FTP: Passive: Yes [Force IP: Auto]; MLSD: Auto [List all: Auto]; HOST: Auto
+. 2019-06-08 13:45:15.380 Local directory: default, Remote directory: home, Update: Yes, Cache: Yes
+. 2019-06-08 13:45:15.380 Cache directory changes: Yes, Permanent: Yes
+. 2019-06-08 13:45:15.380 Recycle bin: Delete to: No, Overwritten to: No, Bin path: 
+. 2019-06-08 13:45:15.380 Timezone offset: 0h 0m
+. 2019-06-08 13:45:15.380 --------------------------------------------------------------------------
+. 2019-06-08 13:45:15.384 Connecting to 192.168.137.27:5000 ...
+. 2019-06-08 13:45:30.370 Timeout detected. (control connection)
+. 2019-06-08 13:45:30.370 Connection failed.
+. 2019-06-08 13:51:41.408 --------------------------------------------------------------------------
+. 2019-06-08 13:51:41.409 WinSCP Version 5.15.2 (Build 9590) (OS 10.0.17134 - Windows 10 Enterprise)
+. 2019-06-08 13:51:41.410 Configuration: nul
+. 2019-06-08 13:51:41.410 Log level: Normal
+. 2019-06-08 13:51:41.410 Local account: LAPTOP-4MN24JV3\colin
+. 2019-06-08 13:51:41.410 Working directory: C:\Users\colin\Videos\Super Mario Odyssey\TAS\Programs\Spreadsheet-to-SMO-TAS-Script\WinSCP_Script_Maker
+. 2019-06-08 13:51:41.410 Process ID: 16600
+. 2019-06-08 13:51:41.411 Command-line: "C:\Program Files (x86)\WinSCP\WinSCP.exe" /console=5.15.2 /consoleinstance=_21180_775 "/log=WinSCP.log" "/ini=nul" "/script=script_for_upload.txt" 
+. 2019-06-08 13:51:41.411 Time zone: Current: GMT-4, Standard: GMT-5 (Eastern Standard Time), DST: GMT-4 (Eastern Daylight Time), DST Start: 3/10/2019, DST End: 11/3/2019
+. 2019-06-08 13:51:41.411 Login time: Saturday, June 8, 2019 1:51:41 PM
+. 2019-06-08 13:51:41.411 --------------------------------------------------------------------------
+. 2019-06-08 13:51:41.411 Script: Retrospectively logging previous script records:
+> 2019-06-08 13:51:41.411 Script: open ftp://a@xxx.xxx.xxx.xxx:5000/
+. 2019-06-08 13:51:41.411 --------------------------------------------------------------------------
+. 2019-06-08 13:51:41.411 Session name: a@xxx.xxx.xxx.xxx (Ad-Hoc site)
+. 2019-06-08 13:51:41.411 Host name: xxx.xxx.xxx.xxx (Port: 5000)
+. 2019-06-08 13:51:41.411 User name: a (Password: No, Key file: No, Passphrase: No)
+. 2019-06-08 13:51:41.411 Transfer Protocol: FTP
+. 2019-06-08 13:51:41.411 Ping type: Dummy, Ping interval: 30 sec; Timeout: 15 sec
+. 2019-06-08 13:51:41.411 Disable Nagle: No
+. 2019-06-08 13:51:41.411 Proxy: None
+. 2019-06-08 13:51:41.411 Send buffer: 262144
+. 2019-06-08 13:51:41.411 UTF: Auto
+. 2019-06-08 13:51:41.411 FTPS: None [Client certificate: No]
+. 2019-06-08 13:51:41.411 FTP: Passive: Yes [Force IP: Auto]; MLSD: Auto [List all: Auto]; HOST: Auto
+. 2019-06-08 13:51:41.411 Local directory: default, Remote directory: home, Update: Yes, Cache: Yes
+. 2019-06-08 13:51:41.411 Cache directory changes: Yes, Permanent: Yes
+. 2019-06-08 13:51:41.411 Recycle bin: Delete to: No, Overwritten to: No, Bin path: 
+. 2019-06-08 13:51:41.411 Timezone offset: 0h 0m
+. 2019-06-08 13:51:41.411 --------------------------------------------------------------------------
+. 2019-06-08 13:51:41.414 Connecting to xxx.xxx.xxx.xxx:5000 ...
+. 2019-06-08 13:51:41.418 Connection failed.
+. 2019-06-08 13:51:56.996 --------------------------------------------------------------------------
+. 2019-06-08 13:51:56.996 WinSCP Version 5.15.2 (Build 9590) (OS 10.0.17134 - Windows 10 Enterprise)
+. 2019-06-08 13:51:56.997 Configuration: nul
+. 2019-06-08 13:51:56.997 Log level: Normal
+. 2019-06-08 13:51:56.997 Local account: LAPTOP-4MN24JV3\colin
+. 2019-06-08 13:51:56.997 Working directory: C:\Users\colin\Videos\Super Mario Odyssey\TAS\Programs\Spreadsheet-to-SMO-TAS-Script\WinSCP_Script_Maker
+. 2019-06-08 13:51:56.997 Process ID: 18108
+. 2019-06-08 13:51:56.998 Command-line: "C:\Program Files (x86)\WinSCP\WinSCP.exe" /console=5.15.2 /consoleinstance=_19768_687 "/log=WinSCP.log" "/ini=nul" "/script=script_for_upload.txt" 
+. 2019-06-08 13:51:56.998 Time zone: Current: GMT-4, Standard: GMT-5 (Eastern Standard Time), DST: GMT-4 (Eastern Daylight Time), DST Start: 3/10/2019, DST End: 11/3/2019
+. 2019-06-08 13:51:56.998 Login time: Saturday, June 8, 2019 1:51:56 PM
+. 2019-06-08 13:51:56.998 --------------------------------------------------------------------------
+. 2019-06-08 13:51:56.998 Script: Retrospectively logging previous script records:
+> 2019-06-08 13:51:56.998 Script: open ftp://a@xxx.xxx.xxx.xxx:5000/
+. 2019-06-08 13:51:56.998 --------------------------------------------------------------------------
+. 2019-06-08 13:51:56.998 Session name: a@xxx.xxx.xxx.xxx (Ad-Hoc site)
+. 2019-06-08 13:51:56.998 Host name: xxx.xxx.xxx.xxx (Port: 5000)
+. 2019-06-08 13:51:56.998 User name: a (Password: No, Key file: No, Passphrase: No)
+. 2019-06-08 13:51:56.998 Transfer Protocol: FTP
+. 2019-06-08 13:51:56.998 Ping type: Dummy, Ping interval: 30 sec; Timeout: 15 sec
+. 2019-06-08 13:51:56.998 Disable Nagle: No
+. 2019-06-08 13:51:56.998 Proxy: None
+. 2019-06-08 13:51:56.998 Send buffer: 262144
+. 2019-06-08 13:51:56.998 UTF: Auto
+. 2019-06-08 13:51:56.998 FTPS: None [Client certificate: No]
+. 2019-06-08 13:51:56.998 FTP: Passive: Yes [Force IP: Auto]; MLSD: Auto [List all: Auto]; HOST: Auto
+. 2019-06-08 13:51:56.998 Local directory: default, Remote directory: home, Update: Yes, Cache: Yes
+. 2019-06-08 13:51:56.998 Cache directory changes: Yes, Permanent: Yes
+. 2019-06-08 13:51:56.998 Recycle bin: Delete to: No, Overwritten to: No, Bin path: 
+. 2019-06-08 13:51:56.998 Timezone offset: 0h 0m
+. 2019-06-08 13:51:56.998 --------------------------------------------------------------------------
+. 2019-06-08 13:51:57.003 Connecting to xxx.xxx.xxx.xxx:5000 ...
+. 2019-06-08 13:51:57.007 Connection failed.
