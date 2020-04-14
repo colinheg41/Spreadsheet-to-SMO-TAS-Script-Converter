@@ -66,7 +66,7 @@ std::vector<std::string> choose_files (std::string base_tsv, bool tsv_folder) {
 void write_scripts (const std::vector<std::string>& file_names, std::string delete_param, bool script_folder) {
 	std::string script_name;
 	
-	for (unsigned int i = 0; i < file_names.size(); ++i) {
+	for (unsigned int i = 1; i < file_names.size(); ++i) {
 		script_name = "";
 		// If the scripts are supposed to be in a separate folder, include that in the file name
 		if (script_folder) {
